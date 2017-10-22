@@ -46,7 +46,7 @@ public class UserController {
                 return new ModelAndView("admin");
             }
         }catch (Exception e){
-
+            e.printStackTrace();
         }
         return new ModelAndView("login");
     }

@@ -1,9 +1,11 @@
 package com.share1024.model;
 
+import java.io.Serializable;
+
 /**
  * Created by yesheng on 2017/10/16.
  */
-public class User {
+public class User implements Serializable {
 
     private String username;
 

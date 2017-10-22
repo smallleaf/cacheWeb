@@ -13,10 +13,11 @@
     </bean>
 
     <bean id="customCacheManager" class="com.share1024.cache.CustomCacheManager"></bean>
+    <bean id="redisCacheManager" class="com.share1024.cache.RedisCacheManager"></bean>
 
     <!-- 凭证匹配器 -->
     <bean id="credentialsMatcher" class="com.share1024.shiro.RetryLimitHashedCredentialsMatcher">
-        <constructor-arg ref="customCacheManager"/>
+        <constructor-arg ref="redisCacheManager"/>
         <property name="hashAlgorithmName" value="md5"/>
         <property name="hashIterations" value="2"/>
         <property name="storedCredentialsHexEncoded" value="true"/>
@@ -65,12 +66,14 @@
         <property name="sessionIdCookie" ref="sessionIdCookie"/>
     </bean>
 
+    <bean id="redisSessionFactory" class="com.share1024.cache.RedisSessionFactory"></bean>
+
     <!-- 安全管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="userRealm"/>
         <property name="sessionManager" ref="sessionManager"/>
         <!--<property name="cacheManager" ref="cacheManagerShiro"/>-->
-        <property name="cacheManager" ref="customCacheManager"/>
+        <property name="cacheManager" ref="redisCacheManager"/>
     </bean>
 
 
